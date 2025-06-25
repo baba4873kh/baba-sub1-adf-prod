@@ -1,0 +1,98 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "baba-sub1-azure-data-factory-prod"
+		},
+		"ADF_AzureBlobStorage_AccountKey_LS_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ADF_AzureBlobStorage_AccountKey_LS'"
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "91b43c6c-a652-4227-999b-0d38e8fe2d76"
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "1b9f27dd-e81c-4ead-9d57-6d07e437df85"
+		},
+		"ADF_AzureBlobStorage_SysAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureBlobStorage_UserAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://baba-sub1-key-vault-prod.vault.azure.net/"
+		},
+		"ADF_AzureSynapseArtifacts_LS_properties_typeProperties_endpoint": {
+			"type": "string",
+			"defaultValue": "https://baba-sub1-synapse-analytics-ws.dev.azuresynapse.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "baba-sub1-azure-data-factory-prod_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ADF_AzureBlobStorage_AccountKey_LS_connectionString": {
+						"value": "[parameters('ADF_AzureBlobStorage_AccountKey_LS_connectionString')]"
+					},
+					"ADF_AzureBlobStorage_SysAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('ADF_AzureBlobStorage_SysAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint')]"
+					},
+					"ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS_properties_typeProperties_baseUrl": {
+						"value": "[parameters('ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS_properties_typeProperties_baseUrl')]"
+					},
+					"ADF_AzureSynapseArtifacts_LS_properties_typeProperties_endpoint": {
+						"value": "[parameters('ADF_AzureSynapseArtifacts_LS_properties_typeProperties_endpoint')]"
+					},
+					"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('ADF_AzureBlobStorage_SP_LS_properties_typeProperties_serviceEndpoint')]"
+					},
+					"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_tenant": {
+						"value": "[parameters('ADF_AzureBlobStorage_SP_LS_properties_typeProperties_tenant')]"
+					},
+					"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('ADF_AzureBlobStorage_SP_LS_properties_typeProperties_servicePrincipalId')]"
+					},
+					"ADF_AzureBlobStorage_UserAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('ADF_AzureBlobStorage_UserAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

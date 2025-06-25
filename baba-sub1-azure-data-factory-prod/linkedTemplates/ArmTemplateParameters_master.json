@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "baba-sub1-azure-data-factory-prod"
+		},
+		"ADF_AzureBlobStorage_AccountKey_LS_connectionString": {
+			"value": ""
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_serviceEndpoint": {
+			"value": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_tenant": {
+			"value": "91b43c6c-a652-4227-999b-0d38e8fe2d76"
+		},
+		"ADF_AzureBlobStorage_SP_LS_properties_typeProperties_servicePrincipalId": {
+			"value": "1b9f27dd-e81c-4ead-9d57-6d07e437df85"
+		},
+		"ADF_AzureBlobStorage_SysAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+			"value": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureBlobStorage_UserAssigned_ManagedIdentity_LS_properties_typeProperties_serviceEndpoint": {
+			"value": "https://babasub1adlsgen2ws.blob.core.windows.net/"
+		},
+		"ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS_properties_typeProperties_baseUrl": {
+			"value": "https://baba-sub1-key-vault-prod.vault.azure.net/"
+		},
+		"ADF_AzureSynapseArtifacts_LS_properties_typeProperties_endpoint": {
+			"value": "https://baba-sub1-synapse-analytics-ws.dev.azuresynapse.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
