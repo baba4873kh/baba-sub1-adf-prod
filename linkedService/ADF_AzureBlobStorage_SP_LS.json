@@ -1,0 +1,23 @@
+{
+	"name": "ADF_AzureBlobStorage_SP_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://babasub1adlsgen2ws.blob.core.windows.net/",
+			"tenant": "91b43c6c-a652-4227-999b-0d38e8fe2d76",
+			"servicePrincipalId": "1b9f27dd-e81c-4ead-9d57-6d07e437df85",
+			"servicePrincipalCredentialType": "ServicePrincipalKey",
+			"servicePrincipalCredential": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adf-adls-sp-app-reg-secret"
+			},
+			"accountKind": "StorageV2"
+		}
+	}
+}

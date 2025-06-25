@@ -1,0 +1,11 @@
+{
+	"name": "ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://baba-sub1-key-vault-prod.vault.azure.net/"
+		}
+	}
+}

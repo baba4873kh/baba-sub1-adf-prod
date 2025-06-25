@@ -1,0 +1,15 @@
+{
+	"name": "baba-sub1-azure-data-factory-prod",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "3803a9eb-fd26-40bc-a34f-47bba8e93003",
+		"tenantId": "91b43c6c-a652-4227-999b-0d38e8fe2d76",
+		"userAssignedIdentities": {
+			"/subscriptions/4f762e40-d48a-4814-b2a4-1094baf9090c/resourcegroups/baba-sub1-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-mngd-identity-adf-databricks": {
+				"clientId": "d80048fb-d14b-41ed-9385-1bdc41a53ef2",
+				"principalId": "18126825-b9eb-4295-93d2-66b84b304b80"
+			}
+		}
+	}
+}

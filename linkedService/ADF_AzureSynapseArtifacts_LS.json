@@ -1,0 +1,13 @@
+{
+	"name": "ADF_AzureSynapseArtifacts_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSynapseArtifacts",
+		"typeProperties": {
+			"endpoint": "https://baba-sub1-synapse-analytics-ws.dev.azuresynapse.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/4f762e40-d48a-4814-b2a4-1094baf9090c/resourceGroups/baba-sub1-rg/providers/Microsoft.Synapse/workspaces/baba-sub1-synapse-analytics-ws"
+		}
+	}
+}

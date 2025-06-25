@@ -1,0 +1,222 @@
+{
+	"name": "DataInjestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "RTBListOfFiles",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"fileListPath": "raw/operations/config/FilesToBeRead.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedTextWithoutFilenameWithoutHeader",
+						"type": "DatasetReference",
+						"parameters": {
+							"ContainerName": {
+								"value": "@pipeline().parameters.RawContainerName",
+								"type": "Expression"
+							},
+							"DirectoryName": {
+								"value": "@pipeline().parameters.RawDirectoryName",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CSVDatasetADLSParameterisedPath",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": {
+								"value": "@pipeline().parameters.BronzeContainerName",
+								"type": "Expression"
+							},
+							"directoryName": {
+								"value": "@pipeline().parameters.BronzeDirectoryName",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@pipeline().parameters.BronzeCuratedFile",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "RTBWildCard",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "RTBListOfFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@formatDateTime(utcNow(), 'yyyy-MM-ddT00:00:00Z')",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@utcNow()",
+								"type": "Expression"
+							},
+							"wildcardFolderPath": {
+								"value": "@pipeline().parameters.RawDirectoryName",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CSVDatasetADLSParameterisedPath",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": {
+								"value": "@pipeline().parameters.RawContainerName",
+								"type": "Expression"
+							},
+							"directoryName": {
+								"value": "@pipeline().parameters.RawDirectoryName",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@trim('')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CSVDatasetADLSParameterisedPath",
+						"type": "DatasetReference",
+						"parameters": {
+							"containerName": {
+								"value": "@pipeline().parameters.BronzeContainerName",
+								"type": "Expression"
+							},
+							"directoryName": {
+								"value": "@pipeline().parameters.BronzeDirectoryName",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@trim('')",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"RawContainerName": {
+				"type": "string",
+				"defaultValue": "raw"
+			},
+			"RawDirectoryName": {
+				"type": "string",
+				"defaultValue": "operations"
+			},
+			"BronzeContainerName": {
+				"type": "string",
+				"defaultValue": "bronze"
+			},
+			"BronzeDirectoryName": {
+				"type": "string",
+				"defaultValue": "curated"
+			},
+			"BronzeCuratedFile": {
+				"type": "string",
+				"defaultValue": "CuratedFile.csv"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-25T18:33:21Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

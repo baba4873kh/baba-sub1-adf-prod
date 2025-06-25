@@ -1,0 +1,12 @@
+{
+	"name": "ADF_AzureBlobStorage_SysAssigned_ManagedIdentity_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://babasub1adlsgen2ws.blob.core.windows.net/",
+			"accountKind": "StorageV2"
+		}
+	}
+}

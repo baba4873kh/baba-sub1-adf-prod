@@ -1,0 +1,29 @@
+{
+	"name": "ADF_AzureDatabricks_AccessToken_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-2869953084351923.3.azuredatabricks.net",
+			"accessToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ADF_AzureKeyVault_SysAssigned_ManagedIdentity_LS",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adf-databricks-ls-access-token"
+			},
+			"newClusterNodeType": "Standard_F4",
+			"newClusterNumOfWorker": "1",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "15.4.x-scala2.12",
+			"newClusterDriverNodeType": "Standard_F4",
+			"clusterOption": "Fixed",
+			"newClusterInitScripts": [],
+			"dataSecurityMode": "USER_ISOLATION"
+		}
+	}
+}

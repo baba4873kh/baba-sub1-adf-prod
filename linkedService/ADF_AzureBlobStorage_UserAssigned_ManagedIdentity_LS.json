@@ -1,0 +1,16 @@
+{
+	"name": "ADF_AzureBlobStorage_UserAssigned_ManagedIdentity_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://babasub1adlsgen2ws.blob.core.windows.net/",
+			"accountKind": "StorageV2",
+			"credential": {
+				"referenceName": "ADF_UserAssigned_ManagedIdentity_MultiUse",
+				"type": "CredentialReference"
+			}
+		}
+	}
+}
