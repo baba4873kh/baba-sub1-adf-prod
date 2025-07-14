@@ -1,7 +1,11 @@
 {
 	"name": "ADF_ADB_CI_AccessToken_LS",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"ClusterNodeType": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
@@ -23,5 +27,6 @@
 			"clusterOption": "Fixed",
 			"newClusterInitScripts": []
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
