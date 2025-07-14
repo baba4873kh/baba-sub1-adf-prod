@@ -1,11 +1,6 @@
 {
 	"name": "ADF_ADB_CI_AccessToken_LS",
 	"properties": {
-		"parameters": {
-			"ClusterNodeType": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "AzureDatabricks",
 		"typeProperties": {
